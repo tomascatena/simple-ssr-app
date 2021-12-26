@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:build:server": "webpack --config webpack.server.ts"
+    "dev:build:server": "webpack --config webpack.server.ts --watch",
+    "dev:server": "nodemon --watch build --exec \"node build/bundle.js\""
   },
   "keywords": [],
   "author": "Tomás Catena",
@@ -43,6 +44,7 @@
     "@types/webpack-dev-server": "^4.5.0",
     "babel-loader": "^8.2.3",
     "ts-node": "^10.4.0",
+    "typescript": "^4.5.4",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.1"

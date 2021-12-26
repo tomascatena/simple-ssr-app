@@ -40,12 +40,6 @@ const config: Configuration = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-
-  devServer: {
-    static: path.join(__dirname, 'build'),
-    compress: true,
-    port: 4000,
-  },
 }
 
 export default config
