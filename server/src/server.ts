@@ -1,14 +1,14 @@
-import express from 'express'
-import renderer from './helpers/renderer'
+import express from 'express';
+import renderer from './helpers/renderer';
 
-const app = express()
+const app = express();
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.send(renderer())
-})
+  res.send(renderer(req));
+});
 
 app.listen(3000, () => {
-  console.log('Listening on port 3000')
-})
+  console.log('Listening on port 3000');
+});

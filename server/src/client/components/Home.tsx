@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 
-interface Props {}
+interface Props { }
 
 const Home: FC = () => {
   return (
@@ -8,7 +8,7 @@ const Home: FC = () => {
       <div>I'm the best Home Component!</div>
       <button onClick={() => console.log('Hola!!')}>Press me!</button>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -1,4 +1,4 @@
-import { Configuration } from 'webpack'
+import { Configuration } from 'webpack';
 
 const config: Configuration = {
   mode: 'development',
@@ -26,6 +26,8 @@ const config: Configuration = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-}
 
-export default config
+  devtool: 'source-map'
+};
+
+export default config;
