@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev:build:server": "webpack --config webpack.server.ts --watch",
-    "dev:server": "nodemon --watch build --exec \"node build/bundle.js\""
+    "dev:build:client": "webpack --config webpack.client.ts --watch",
+    "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
+    "dev:client": "nodemon --watch public --exec \"node public/bundle.js\""
   },
   "keywords": [],
   "author": "Tomás Catena",

@@ -4,17 +4,13 @@ import { Configuration } from 'webpack'
 const config: Configuration = {
   mode: 'development',
 
-  // Inform webpack that we're building a bundle for
-  // NodeJS, rather than for the browser
-  target: 'node',
-
   // Tell webpack the root file of our server application
-  entry: './src/server.ts',
+  entry: './src/client/client.ts',
 
   // Tell webpack where to put the output file that is generated
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'public'),
   },
 
   // Tell webpack to run babel on every file it runs through
