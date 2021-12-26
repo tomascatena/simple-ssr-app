@@ -1,9 +1,9 @@
 import path from 'path'
 import { Configuration } from 'webpack'
+import merge from 'webpack-merge'
+import baseConfig from './webpack.base'
 
 const config: Configuration = {
-  mode: 'development',
-
   // Inform webpack that we're building a bundle for
   // NodeJS, rather than for the browser
   target: 'node',
@@ -16,30 +16,6 @@ const config: Configuration = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
   },
-
-  // Tell webpack to run babel on every file it runs through
-  module: {
-    rules: [
-      {
-        test: /\.(ts|js)x?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react',
-              '@babel/preset-typescript',
-            ],
-          },
-        },
-      },
-    ],
-  },
-
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
 }
 
-export default config
+export default merge(baseConfig, config)
