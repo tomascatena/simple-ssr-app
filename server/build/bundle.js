@@ -223,7 +223,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var app = express__WEBPACK_IMPORTED_MODULE_0___default()();
 app.use(express__WEBPACK_IMPORTED_MODULE_0___default()["static"]('public'));
-app.get('/', function (req, res) {
+app.get('*', function (req, res) {
   res.send((0,_helpers_renderer__WEBPACK_IMPORTED_MODULE_1__["default"])(req));
 });
 app.listen(3000, function () {

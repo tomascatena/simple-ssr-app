@@ -5,10 +5,9 @@ import Home from './components/Home';
 const AppRoutes: FC = () => {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path="/" element={<Home />} />
     </Routes>
   );
 };
-
 
 export default AppRoutes;
