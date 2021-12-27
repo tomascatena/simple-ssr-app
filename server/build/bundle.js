@@ -398,7 +398,7 @@ var renderer = function renderer(req, store) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom_server__WEBPACK_IMPORTED_MODULE_2__.StaticRouter, {
     location: req.path
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_client_AppRoutes__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
-  return "\n  <html>\n    <head>\n    </head>\n\n    <body>\n      <div id=\"root\">".concat(content, "</div>\n\n      <script src=\"bundle.js\"></script>\n    </body>\n  </html>\n  ");
+  return "\n  <html>\n    <head>\n    </head>\n\n    <body>\n      <div id=\"root\">".concat(content, "</div>\n\n      <script id=\"redux-preload-state\">\n        // WARNING: See the following for security issues around embedding JSON in HTML:\n        // https://redux.js.org/usage/server-rendering#security-considerations\n        window.__PRELOADED_STATE__ = ").concat(JSON.stringify(store.getState()).replace(/</g, "\\u003c"), "\n      </script>\n\n      <script src=\"bundle.js\"></script>\n    </body>\n  </html>\n  ");
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderer);

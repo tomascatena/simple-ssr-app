@@ -4,17 +4,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRoutes from './AppRoutes';
 import { BrowserRouter, Outlet } from 'react-router-dom';
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action, Store } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import usersReducer from './state/users/usersSlice';
-import { renderRoutes } from 'react-router-config';
 
+declare global {
+  interface Window {
+    __PRELOADED_STATE__: ReturnType<Store['getState']>;
+  }
+}
+
+// Create Redux store with state injected by the server
 export const store = configureStore({
   reducer: {
     users: usersReducer,
   },
+  preloadedState: window.__PRELOADED_STATE__,
   devTools: process.env.NODE_ENV !== 'production',
 });
+
+// Allow the passed state to be garbage-collected
+delete window.__PRELOADED_STATE__;
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

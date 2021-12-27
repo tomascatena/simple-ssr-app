@@ -40442,12 +40442,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// Create Redux store with state injected by the server
 var store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_5__.configureStore)({
   reducer: {
     users: _state_users_usersSlice__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
+  preloadedState: window.__PRELOADED_STATE__,
   devTools: "development" !== 'production'
-});
+}); // Allow the passed state to be garbage-collected
+
+delete window.__PRELOADED_STATE__;
 react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__.Provider, {
   store: store
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_AppRoutes__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Outlet, null))), document.querySelector('#root'));
