@@ -10,7 +10,9 @@ const UsersListPage: FC<Props> = () => {
   const { usersList } = useTypedSelector((state) => state.users);
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    if (!usersList) {
+      dispatch(fetchUsers());
+    }
   }, []);
 
   return (
