@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 interface Props { }
 
-const Home: FC = () => {
+const HomePage: FC = () => {
   return (
     <div>
       <div>I'm the best Home Component!</div>
@@ -11,4 +11,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default { element: <HomePage /> };

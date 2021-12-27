@@ -5,7 +5,7 @@ import createStore from '../../helpers/createStore';
 
 interface Props { }
 
-const UsersList: FC<Props> = () => {
+const UsersListPage: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const { usersList } = useTypedSelector((state) => state.users);
 
@@ -28,8 +28,12 @@ const UsersList: FC<Props> = () => {
   );
 };
 
-export default UsersList;
-
-export const loadData = (store: ReturnType<typeof createStore>) => {
+const loadData = (store: ReturnType<typeof createStore>) => {
   return store.dispatch(fetchUsers());
 };
+
+export default {
+  element: <UsersListPage />,
+  loadData
+};
+

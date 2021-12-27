@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
-import Home from './components/Home';
-import UsersList, { loadData } from './components/UsersList';
+import HomePage from './pages/HomePage';
+import UsersListPage from './pages/UsersListPage';
 import { useRoutes } from 'react-router-dom';
 
 export const RoutesArray = [
   {
+    ...HomePage,
     path: '/',
     exact: true,
-    element: <Home />
   },
   {
+    ...UsersListPage,
     path: '/users',
-    element: <UsersList />,
-    loadData
+
   },
 ];
 
