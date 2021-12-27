@@ -3,10 +3,10 @@ import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import AppRoutes from '../client/AppRoutes';
 import { Request } from 'express';
-import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import createStore from './createStore';
 
-const renderer = (req: Request, store: ReturnType<typeof configureStore>) => {
+const renderer = (req: Request, store: ReturnType<typeof createStore>) => {
   const content = ReactDOMServer.renderToString(
     <Provider store={store}>
       <StaticRouter location={req.path}>

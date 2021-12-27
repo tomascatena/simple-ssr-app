@@ -6,11 +6,11 @@ import AppRoutes from './AppRoutes';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import usersReducer from './state/users/usersSlice';
+import usersReducer, { usersActions } from './state/users/usersSlice';
 
 export const store = configureStore({
   reducer: {
-    users: usersReducer
+    users: usersReducer,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });
