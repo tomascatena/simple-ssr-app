@@ -58,6 +58,32 @@ var Home = function Home() {
 
 /***/ }),
 
+/***/ "./src/helpers/createStore.ts":
+/*!************************************!*\
+  !*** ./src/helpers/createStore.ts ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "@reduxjs/toolkit");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var createStore = function createStore() {
+  var store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.configureStore)({
+    reducer: {},
+    devTools: "development" !== 'production'
+  });
+  return store;
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createStore);
+
+/***/ }),
+
 /***/ "./src/helpers/renderer.tsx":
 /*!**********************************!*\
   !*** ./src/helpers/renderer.tsx ***!
@@ -75,19 +101,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom/server */ "react-router-dom/server");
 /* harmony import */ var react_router_dom_server__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router_dom_server__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _client_AppRoutes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../client/AppRoutes */ "./src/client/AppRoutes.tsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
 
-var renderer = function renderer(req) {
-  var content = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToString( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom_server__WEBPACK_IMPORTED_MODULE_2__.StaticRouter, {
+
+var renderer = function renderer(req, store) {
+  var content = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToString( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__.Provider, {
+    store: store
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom_server__WEBPACK_IMPORTED_MODULE_2__.StaticRouter, {
     location: req.path
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_client_AppRoutes__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_client_AppRoutes__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
   return "\n  <html>\n    <head>\n    </head>\n\n    <body>\n      <div id=\"root\">".concat(content, "</div>\n\n      <script src=\"bundle.js\"></script>\n    </body>\n  </html>\n  ");
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderer);
+
+/***/ }),
+
+/***/ "@reduxjs/toolkit":
+/*!***********************************!*\
+  !*** external "@reduxjs/toolkit" ***!
+  \***********************************/
+/***/ ((module) => {
+
+module.exports = require("@reduxjs/toolkit");
 
 /***/ }),
 
@@ -118,6 +159,16 @@ module.exports = require("react");
 /***/ ((module) => {
 
 module.exports = require("react-dom/server");
+
+/***/ }),
+
+/***/ "react-redux":
+/*!******************************!*\
+  !*** external "react-redux" ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = require("react-redux");
 
 /***/ }),
 
@@ -218,13 +269,16 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ "express");
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helpers_renderer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/renderer */ "./src/helpers/renderer.tsx");
+/* harmony import */ var _helpers_createStore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/createStore */ "./src/helpers/createStore.ts");
+/* harmony import */ var _helpers_renderer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/renderer */ "./src/helpers/renderer.tsx");
+
 
 
 var app = express__WEBPACK_IMPORTED_MODULE_0___default()();
 app.use(express__WEBPACK_IMPORTED_MODULE_0___default()["static"]('public'));
 app.get('*', function (req, res) {
-  res.send((0,_helpers_renderer__WEBPACK_IMPORTED_MODULE_1__["default"])(req));
+  var store = (0,_helpers_createStore__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  res.send((0,_helpers_renderer__WEBPACK_IMPORTED_MODULE_2__["default"])(req, store));
 });
 app.listen(3000, function () {
   console.log('Listening on port 3000');

@@ -17,6 +17,9 @@ const config: Configuration = {
               '@babel/preset-react',
               '@babel/preset-typescript',
             ],
+            plugins: [
+              ['@babel/plugin-transform-runtime']
+            ],
           },
         },
       },
@@ -27,7 +30,7 @@ const config: Configuration = {
     extensions: ['.tsx', '.ts', '.js'],
   },
 
-  devtool: 'source-map'
+  devtool: 'source-map',
 };
 
 export default config;
