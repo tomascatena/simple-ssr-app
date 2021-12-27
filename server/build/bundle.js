@@ -388,6 +388,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _client_AppRoutes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../client/AppRoutes */ "./src/client/AppRoutes.tsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var serialize_javascript__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! serialize-javascript */ "serialize-javascript");
+/* harmony import */ var serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(serialize_javascript__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -400,7 +403,7 @@ var renderer = function renderer(req, store) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom_server__WEBPACK_IMPORTED_MODULE_2__.StaticRouter, {
     location: req.path
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_client_AppRoutes__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
-  return "\n  <html>\n    <head>\n    </head>\n\n    <body>\n      <div id=\"root\">".concat(content, "</div>\n\n      <script id=\"redux-preload-state\">\n        // WARNING: See the following for security issues around embedding JSON in HTML:\n        // https://redux.js.org/usage/server-rendering#security-considerations\n        window.__PRELOADED_STATE__ = ").concat(JSON.stringify(store.getState()).replace(/</g, "\\u003c"), "\n      </script>\n\n      <script src=\"bundle.js\"></script>\n    </body>\n  </html>\n  ");
+  return "\n  <html>\n    <head>\n    </head>\n\n    <body>\n      <div id=\"root\">".concat(content, "</div>\n\n      <script id=\"redux-preload-state\">\n        window.__PRELOADED_STATE__ = ").concat(serialize_javascript__WEBPACK_IMPORTED_MODULE_5___default()(store.getState()), "\n      </script>\n\n      <script src=\"bundle.js\"></script>\n    </body>\n  </html>\n  ");
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderer);
@@ -524,6 +527,16 @@ module.exports = require("react-router-dom");
 /***/ ((module) => {
 
 module.exports = require("react-router-dom/server");
+
+/***/ }),
+
+/***/ "serialize-javascript":
+/*!***************************************!*\
+  !*** external "serialize-javascript" ***!
+  \***************************************/
+/***/ ((module) => {
+
+module.exports = require("serialize-javascript");
 
 /***/ })
 
