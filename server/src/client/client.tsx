@@ -7,6 +7,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
+export const store = configureStore({
+  reducer: {},
+  devTools: process.env.NODE_ENV !== 'production',
+});
+
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
@@ -16,17 +21,11 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 
-export const store = configureStore({
-  reducer: {},
-  devTools: process.env.NODE_ENV !== 'production',
-});
-
 ReactDOM.hydrate(
   <Provider store={store}>
     <BrowserRouter>
       <AppRoutes />
     </BrowserRouter>
   </Provider>,
-
   document.querySelector('#root'),
 );
