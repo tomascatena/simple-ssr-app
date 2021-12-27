@@ -6,13 +6,16 @@ import {
 } from '@reduxjs/toolkit';
 import { fetchUsers } from '../client/state/users/users.thunk';
 import { AnyAction } from 'redux';
+import usersSlice from '../client/state/users/usersSlice';
 
 const createStore = () => {
   const store = configureStore({
-    reducer: {},
+    reducer: {
+      users: usersSlice
+    },
     preloadedState: {
       users: {
-        usersList: [],
+        usersList: null,
         error: null,
         loading: false,
         currentRequestId: undefined

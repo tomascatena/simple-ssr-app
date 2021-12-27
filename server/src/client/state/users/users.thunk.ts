@@ -8,7 +8,7 @@ export const fetchUsers = createAsyncThunk<User[], void, { state: RootState; }>(
   async (_, { getState, requestId }) => {
     const { loading, currentRequestId } = getState().users;
 
-    if (loading || requestId !== currentRequestId) {
+    if (!loading || requestId !== currentRequestId) {
       return;
     }
 

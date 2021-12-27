@@ -6,7 +6,7 @@ interface Props { }
 
 const UsersList: FC<Props> = () => {
   const dispatch = useAppDispatch();
-  const users = useTypedSelector((state) => state.users);
+  const { usersList } = useTypedSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -17,7 +17,7 @@ const UsersList: FC<Props> = () => {
       <h1>Here's a big list of users</h1>
 
       <ul>
-        {users && users.usersList?.map((user) => {
+        {usersList?.map((user) => {
           return <li key={user.id}>{user.name}</li>;
         })}
       </ul>

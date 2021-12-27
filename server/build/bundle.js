@@ -82,20 +82,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var UsersList = function UsersList() {
-  var _users$usersList;
-
   var dispatch = (0,_hooks__WEBPACK_IMPORTED_MODULE_1__.useAppDispatch)();
-  var users = (0,_hooks__WEBPACK_IMPORTED_MODULE_1__.useTypedSelector)(function (state) {
+
+  var _useTypedSelector = (0,_hooks__WEBPACK_IMPORTED_MODULE_1__.useTypedSelector)(function (state) {
     return state.users;
-  });
+  }),
+      usersList = _useTypedSelector.usersList;
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     dispatch((0,_state_users_users_thunk__WEBPACK_IMPORTED_MODULE_2__.fetchUsers)());
   }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Here's a big list of users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, users && ((_users$usersList = users.usersList) === null || _users$usersList === void 0 ? void 0 : _users$usersList.map(function (user) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Here's a big list of users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, usersList === null || usersList === void 0 ? void 0 : usersList.map(function (user) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
       key: user.id
     }, user.name);
-  }))));
+  })));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UsersList);
@@ -229,7 +230,7 @@ var fetchUsers = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.createAsyncThu
             getState = _ref.getState, requestId = _ref.requestId;
             _getState$users = getState().users, loading = _getState$users.loading, currentRequestId = _getState$users.currentRequestId;
 
-            if (!(loading || requestId !== currentRequestId)) {
+            if (!(!loading || requestId !== currentRequestId)) {
               _context.next = 4;
               break;
             }
@@ -332,14 +333,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "@reduxjs/toolkit");
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _client_state_users_usersSlice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../client/state/users/usersSlice */ "./src/client/state/users/usersSlice.ts");
+
 
 
 var createStore = function createStore() {
   var store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.configureStore)({
-    reducer: {},
+    reducer: {
+      users: _client_state_users_usersSlice__WEBPACK_IMPORTED_MODULE_1__["default"]
+    },
     preloadedState: {
       users: {
-        usersList: [],
+        usersList: null,
         error: null,
         loading: false,
         currentRequestId: undefined
