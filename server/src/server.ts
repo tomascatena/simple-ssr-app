@@ -3,7 +3,6 @@ import createStore from './helpers/createStore';
 import renderer from './helpers/renderer';
 import { matchRoutes, RouteObject } from 'react-router';
 import { RoutesArray } from './client/AppRoutes';
-import { loadData } from './client/components/UsersList';
 
 export type LoadData = (store: ReturnType<typeof createStore>) => Promise<unknown>;
 

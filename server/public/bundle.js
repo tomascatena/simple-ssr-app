@@ -3657,7 +3657,7 @@ var UsersList = function UsersList() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     dispatch((0,_state_users_users_thunk__WEBPACK_IMPORTED_MODULE_2__.fetchUsers)());
   }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Here's a big list of users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, usersList === null || usersList === void 0 ? void 0 : usersList.map(function (user) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Here's a big list of users"), usersList && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, usersList.map(function (user) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
       key: user.id
     }, user.name);
