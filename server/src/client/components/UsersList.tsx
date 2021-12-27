@@ -1,6 +1,7 @@
 import React, { useEffect, FC, useState } from 'react';
 import { useAppDispatch, useTypedSelector } from '../hooks';
 import { fetchUsers } from '../state/users/users.thunk';
+import createStore from '../../helpers/createStore';
 
 interface Props { }
 
@@ -27,6 +28,6 @@ const UsersList: FC<Props> = () => {
 
 export default UsersList;
 
-export const loadData = () => {
-  console.log('I am trying to load some data');
+export const loadData = (store: ReturnType<typeof createStore>) => {
+  return store.dispatch(fetchUsers());
 };

@@ -106,8 +106,8 @@ var UsersList = function UsersList() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UsersList);
-var loadData = function loadData() {
-  console.log('I am trying to load some data');
+var loadData = function loadData(store) {
+  return store.dispatch((0,_state_users_users_thunk__WEBPACK_IMPORTED_MODULE_2__.fetchUsers)());
 };
 
 /***/ }),
@@ -611,11 +611,16 @@ app.get('*', function (req, res) {
   var _matchRoutes;
 
   var store = (0,_helpers_createStore__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  (_matchRoutes = (0,react_router__WEBPACK_IMPORTED_MODULE_3__.matchRoutes)(_client_AppRoutes__WEBPACK_IMPORTED_MODULE_4__.RoutesArray, req.path)) === null || _matchRoutes === void 0 ? void 0 : _matchRoutes.map(function (match) {
+  var promises = (_matchRoutes = (0,react_router__WEBPACK_IMPORTED_MODULE_3__.matchRoutes)(_client_AppRoutes__WEBPACK_IMPORTED_MODULE_4__.RoutesArray, req.path)) === null || _matchRoutes === void 0 ? void 0 : _matchRoutes.map(function (match) {
     var route = match.route;
-    return route.loadData ? route.loadData() : null;
+    return route.loadData ? route.loadData(store) : null;
   });
-  res.send((0,_helpers_renderer__WEBPACK_IMPORTED_MODULE_2__["default"])(req, store));
+
+  if (promises) {
+    Promise.all(promises).then(function () {
+      res.send((0,_helpers_renderer__WEBPACK_IMPORTED_MODULE_2__["default"])(req, store));
+    });
+  }
 });
 app.listen(3000, function () {
   console.log('Listening on port 3000');

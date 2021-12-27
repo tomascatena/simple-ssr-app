@@ -5,8 +5,10 @@ import { matchRoutes, RouteObject } from 'react-router';
 import { RoutesArray } from './client/AppRoutes';
 import { loadData } from './client/components/UsersList';
 
+export type LoadData = (store: ReturnType<typeof createStore>) => Promise<unknown>;
+
 interface RouteObjectWithLoadData extends RouteObject {
-  loadData?: () => void;
+  loadData?: LoadData;
 }
 
 const app = express();
@@ -16,13 +18,17 @@ app.use(express.static('public'));
 app.get('*', (req, res) => {
   const store = createStore();
 
-  matchRoutes(RoutesArray, req.path)?.map(match => {
+  const promises = matchRoutes(RoutesArray, req.path)?.map(match => {
     const route: RouteObjectWithLoadData = match.route;
 
-    return route.loadData ? route.loadData() : null;
+    return route.loadData ? route.loadData(store) : null;
   });
 
-  res.send(renderer(req, store));
+  if (promises) {
+    Promise.all<typeof promises>(promises).then(() => {
+      res.send(renderer(req, store));
+    });
+  }
 });
 
 app.listen(3000, () => {

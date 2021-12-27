@@ -3665,8 +3665,8 @@ var UsersList = function UsersList() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UsersList);
-var loadData = function loadData() {
-  console.log('I am trying to load some data');
+var loadData = function loadData(store) {
+  return store.dispatch((0,_state_users_users_thunk__WEBPACK_IMPORTED_MODULE_2__.fetchUsers)());
 };
 
 /***/ }),
