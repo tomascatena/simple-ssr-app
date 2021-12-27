@@ -6,6 +6,7 @@ import { Request } from 'express';
 import { Provider } from 'react-redux';
 import createStore from './createStore';
 
+
 const renderer = (req: Request, store: ReturnType<typeof createStore>) => {
   const content = ReactDOMServer.renderToString(
     <Provider store={store}>

@@ -26,3 +26,7 @@ const UsersList: FC<Props> = () => {
 };
 
 export default UsersList;
+
+export const loadData = () => {
+  console.log('I am trying to load some data');
+};

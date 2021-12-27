@@ -3,10 +3,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRoutes from './AppRoutes';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Outlet } from 'react-router-dom';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import usersReducer, { usersActions } from './state/users/usersSlice';
+import usersReducer from './state/users/usersSlice';
+import { renderRoutes } from 'react-router-config';
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,8 @@ ReactDOM.hydrate(
   <Provider store={store}>
     <BrowserRouter>
       <AppRoutes />
+
+      <Outlet />
     </BrowserRouter>
   </Provider>,
   document.querySelector('#root'),

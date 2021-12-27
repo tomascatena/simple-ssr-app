@@ -10,27 +10,32 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RoutesArray": () => (/* binding */ RoutesArray),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Home */ "./src/client/components/Home.tsx");
-/* harmony import */ var _components_UsersList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/UsersList */ "./src/client/components/UsersList.tsx");
+/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Home */ "./src/client/components/Home.tsx");
+/* harmony import */ var _components_UsersList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/UsersList */ "./src/client/components/UsersList.tsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
+var RoutesArray = [{
+  path: '/',
+  exact: true,
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Home__WEBPACK_IMPORTED_MODULE_1__["default"], null)
+}, {
+  path: '/users',
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_UsersList__WEBPACK_IMPORTED_MODULE_2__["default"], null),
+  loadData: _components_UsersList__WEBPACK_IMPORTED_MODULE_2__.loadData
+}];
 
 var AppRoutes = function AppRoutes() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
-    path: "/",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Home__WEBPACK_IMPORTED_MODULE_2__["default"], null)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
-    path: "/users",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_UsersList__WEBPACK_IMPORTED_MODULE_3__["default"], null)
-  }));
+  var element = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useRoutes)(RoutesArray);
+  return element;
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AppRoutes);
@@ -71,7 +76,8 @@ var Home = function Home() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "loadData": () => (/* binding */ loadData)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -100,6 +106,9 @@ var UsersList = function UsersList() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UsersList);
+var loadData = function loadData() {
+  console.log('I am trying to load some data');
+};
 
 /***/ }),
 
@@ -342,14 +351,6 @@ var createStore = function createStore() {
     reducer: {
       users: _client_state_users_usersSlice__WEBPACK_IMPORTED_MODULE_1__["default"]
     },
-    preloadedState: {
-      users: {
-        usersList: null,
-        error: null,
-        loading: false,
-        currentRequestId: undefined
-      }
-    },
     devTools: "development" !== 'production'
   });
   return store;
@@ -487,6 +488,16 @@ module.exports = require("react-redux");
 
 /***/ }),
 
+/***/ "react-router":
+/*!*******************************!*\
+  !*** external "react-router" ***!
+  \*******************************/
+/***/ ((module) => {
+
+module.exports = require("react-router");
+
+/***/ }),
+
 /***/ "react-router-dom":
 /*!***********************************!*\
   !*** external "react-router-dom" ***!
@@ -586,13 +597,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helpers_createStore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/createStore */ "./src/helpers/createStore.ts");
 /* harmony import */ var _helpers_renderer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/renderer */ "./src/helpers/renderer.tsx");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router */ "react-router");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_router__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _client_AppRoutes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./client/AppRoutes */ "./src/client/AppRoutes.tsx");
+
+
 
 
 
 var app = express__WEBPACK_IMPORTED_MODULE_0___default()();
 app.use(express__WEBPACK_IMPORTED_MODULE_0___default()["static"]('public'));
 app.get('*', function (req, res) {
+  var _matchRoutes;
+
   var store = (0,_helpers_createStore__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  (_matchRoutes = (0,react_router__WEBPACK_IMPORTED_MODULE_3__.matchRoutes)(_client_AppRoutes__WEBPACK_IMPORTED_MODULE_4__.RoutesArray, req.path)) === null || _matchRoutes === void 0 ? void 0 : _matchRoutes.map(function (match) {
+    var route = match.route;
+    return route.loadData ? route.loadData() : null;
+  });
   res.send((0,_helpers_renderer__WEBPACK_IMPORTED_MODULE_2__["default"])(req, store));
 });
 app.listen(3000, function () {

@@ -1,16 +1,25 @@
 import React, { FC } from 'react';
-import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
-import UsersList from './components/UsersList';
+import UsersList, { loadData } from './components/UsersList';
+import { useRoutes } from 'react-router-dom';
+
+export const RoutesArray = [
+  {
+    path: '/',
+    exact: true,
+    element: <Home />
+  },
+  {
+    path: '/users',
+    element: <UsersList />,
+    loadData
+  },
+];
 
 const AppRoutes: FC = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
+  const element = useRoutes(RoutesArray);
 
-      <Route path="/users" element={<UsersList />} />
-    </Routes>
-  );
+  return element;
 };
 
 export default AppRoutes;
