@@ -25,7 +25,7 @@ const renderer = (req: Request, store: ReturnType<typeof createStore>) => {
       <div id="root">${content}</div>
 
       <script id="redux-preload-state">
-        window.__PRELOADED_STATE__ = ${serialize((store.getState()))}
+        window.__PRELOADED_STATE__ = ${serialize(store.getState())}
       </script>
 
       <script src="bundle.js"></script>
