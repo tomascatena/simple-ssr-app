@@ -1,5 +1,5 @@
 /node_modules/
-/server/node_modules/
-/server/build/
-/server/public/bundle.js
-/server/public/bundle.js.map
+rendering-server/node_modules/
+rendering-server/build/
+rendering-server/public/bundle.js
+rendering-server/public/bundle.js.map
