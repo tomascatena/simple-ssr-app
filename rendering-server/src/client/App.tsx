@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import HomePage from './pages/HomePage';
 import UsersListPage from './pages/UsersListPage';
 import { useRoutes } from 'react-router-dom';
+import Header from './components/Header';
 
 export const RoutesArray = [
   {
@@ -12,14 +13,19 @@ export const RoutesArray = [
   {
     ...UsersListPage,
     path: '/users',
-
   },
 ];
 
-const AppRoutes: FC = () => {
+const App: FC = () => {
   const element = useRoutes(RoutesArray);
 
-  return element;
+  return (
+    <div>
+      <Header />
+
+      {element}
+    </div>
+  );
 };
 
-export default AppRoutes;
+export default App;

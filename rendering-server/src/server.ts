@@ -2,7 +2,7 @@ import express from 'express';
 import createStore from './helpers/createStore';
 import renderer from './helpers/renderer';
 import { matchRoutes, RouteObject } from 'react-router';
-import { RoutesArray } from './client/AppRoutes';
+import { RoutesArray } from './client/App';
 import proxy from 'express-http-proxy';
 
 export type LoadData = (

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
-import AppRoutes from '../client/AppRoutes';
+import App from '../client/App';
 import { Request } from 'express';
 import { Provider } from 'react-redux';
 import createStore from './createStore';
@@ -11,9 +11,9 @@ const renderer = (req: Request, store: ReturnType<typeof createStore>) => {
   const content = ReactDOMServer.renderToString(
     <Provider store={store}>
       <StaticRouter location={req.path}>
-        <AppRoutes />
+        <App />
       </StaticRouter>
-    </Provider>,
+    </Provider>
   );
 
   return `

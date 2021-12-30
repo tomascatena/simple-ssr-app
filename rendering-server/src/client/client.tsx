@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppRoutes from './AppRoutes';
+import App from './App';
 import { BrowserRouter, Outlet } from 'react-router-dom';
 import {
   configureStore,
@@ -52,7 +52,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 ReactDOM.hydrate(
   <Provider store={store}>
     <BrowserRouter>
-      <AppRoutes />
+      <App />
 
       <Outlet />
     </BrowserRouter>
