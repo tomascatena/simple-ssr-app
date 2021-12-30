@@ -1,31 +1,24 @@
 import React, { FC } from 'react';
-import HomePage from './pages/HomePage';
-import UsersListPage from './pages/UsersListPage';
-import { useRoutes } from 'react-router-dom';
 import Header from './components/Header';
+import { fetchCurrentUser } from './state/auth/auth.thunk';
+import createStore from '../helpers/createStore';
+import { renderRoutes, RouteConfigComponentProps } from 'react-router-config';
 
-export const RoutesArray = [
-  {
-    ...HomePage,
-    path: '/',
-    exact: true,
-  },
-  {
-    ...UsersListPage,
-    path: '/users',
-  },
-];
-
-const App: FC = () => {
-  const element = useRoutes(RoutesArray);
-
+const App: FC<RouteConfigComponentProps> = ({ route }) => {
   return (
     <div>
       <Header />
 
-      {element}
+      {renderRoutes(route?.routes)}
     </div>
   );
 };
 
-export default App;
+const loadData = (store: ReturnType<typeof createStore>) => {
+  return store.dispatch(fetchCurrentUser());
+};
+
+export default {
+  component: App,
+  loadData,
+};

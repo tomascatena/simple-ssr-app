@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Axios } from 'axios';
 import { RootState } from '../../client';
-import { User } from './usersSlice';
+import { User } from '../../user';
 
 export const fetchUsers = createAsyncThunk<User[], void, { state: RootState }>(
   'users/fetchUsers',

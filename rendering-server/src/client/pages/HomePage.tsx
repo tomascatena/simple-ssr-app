@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
-interface Props { }
+interface Props {}
 
-const HomePage: FC = () => {
+const HomePage: FC<Props> = () => {
   return (
     <div>
       <div>I'm the best Home Component!</div>
@@ -11,4 +11,4 @@ const HomePage: FC = () => {
   );
 };
 
-export default { element: <HomePage /> };
+export default { component: HomePage };

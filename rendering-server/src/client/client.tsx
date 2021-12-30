@@ -1,19 +1,15 @@
 // Startup point fo the client side application
 
+import { configureStore, ThunkAction, Action, Store } from '@reduxjs/toolkit';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { BrowserRouter, Outlet } from 'react-router-dom';
-import {
-  configureStore,
-  ThunkAction,
-  Action,
-  Store,
-  getDefaultMiddleware,
-} from '@reduxjs/toolkit';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import usersReducer from './state/users/usersSlice';
+import authReducer from './state/auth/authSlice';
 import axios from 'axios';
+import { renderRoutes } from 'react-router-config';
+import { AppRoutes } from './AppRoutes';
 
 declare global {
   interface Window {
@@ -29,12 +25,14 @@ const axiosInstance = axios.create({
 export const store = configureStore({
   reducer: {
     users: usersReducer,
+    auth: authReducer,
   },
   preloadedState: window.__PRELOADED_STATE__,
   devTools: process.env.NODE_ENV !== 'production',
-  middleware: getDefaultMiddleware({
-    thunk: { extraArgument: axiosInstance },
-  }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: { extraArgument: axiosInstance },
+    }),
 });
 
 // Allow the passed state to be garbage-collected
@@ -52,9 +50,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 ReactDOM.hydrate(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
-
-      <Outlet />
+      <Switch>{renderRoutes(AppRoutes)}</Switch>
     </BrowserRouter>
   </Provider>,
   document.querySelector('#root')

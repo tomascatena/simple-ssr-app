@@ -1,47 +1,47 @@
 import { createSlice, SerializedError } from '@reduxjs/toolkit';
-import { fetchUsers } from './users.thunk';
+import { fetchCurrentUser } from './auth.thunk';
 import { User } from '../../user';
 
 export interface UsersState {
-  usersList: User[] | null;
+  currentUser: User | null;
   loading: boolean;
   currentRequestId: string | undefined;
   error: SerializedError | null | string;
 }
 
 const initialState: UsersState = {
-  usersList: null,
+  currentUser: null,
   loading: false,
   currentRequestId: undefined,
   error: null,
 };
 
-export const usersSlice = createSlice({
-  name: 'users',
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsers.pending, (state, action) => {
+      .addCase(fetchCurrentUser.pending, (state, action) => {
         if (state.loading === false) {
-          state.usersList = null;
+          state.currentUser = null;
           state.loading = true;
           state.error = null;
           state.currentRequestId = action.meta.requestId;
         }
       })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         const { requestId } = action.meta;
         if (state.loading === true && state.currentRequestId === requestId) {
-          state.usersList = action.payload;
+          state.currentUser = action.payload;
           state.loading = false;
           state.currentRequestId = undefined;
         }
       })
-      .addCase(fetchUsers.rejected, (state, action) => {
+      .addCase(fetchCurrentUser.rejected, (state, action) => {
         const { requestId } = action.meta;
         if (state.loading === true && state.currentRequestId === requestId) {
-          state.usersList = null;
+          state.currentUser = null;
           state.loading = false;
           state.error = action.error;
           state.currentRequestId = undefined;
@@ -50,6 +50,6 @@ export const usersSlice = createSlice({
   },
 });
 
-export const usersActions = usersSlice.actions;
+export const authActions = authSlice.actions;
 
-export default usersSlice.reducer;
+export default authSlice.reducer;
