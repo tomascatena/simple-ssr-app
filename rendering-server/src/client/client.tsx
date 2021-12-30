@@ -4,15 +4,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRoutes from './AppRoutes';
 import { BrowserRouter, Outlet } from 'react-router-dom';
-import { configureStore, ThunkAction, Action, Store } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  ThunkAction,
+  Action,
+  Store,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import usersReducer from './state/users/usersSlice';
+import axios from 'axios';
 
 declare global {
   interface Window {
     __PRELOADED_STATE__: ReturnType<Store['getState']>;
   }
 }
+
+const axiosInstance = axios.create({
+  baseURL: '/api',
+});
 
 // Create Redux store with state injected by the server
 export const store = configureStore({
@@ -21,6 +32,9 @@ export const store = configureStore({
   },
   preloadedState: window.__PRELOADED_STATE__,
   devTools: process.env.NODE_ENV !== 'production',
+  middleware: getDefaultMiddleware({
+    thunk: { extraArgument: axiosInstance },
+  }),
 });
 
 // Allow the passed state to be garbage-collected
@@ -43,5 +57,5 @@ ReactDOM.hydrate(
       <Outlet />
     </BrowserRouter>
   </Provider>,
-  document.querySelector('#root'),
+  document.querySelector('#root')
 );

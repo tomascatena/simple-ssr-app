@@ -1,19 +1,21 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { Axios } from 'axios';
 import { RootState } from '../../client';
 import { User } from './usersSlice';
 
-export const fetchUsers = createAsyncThunk<User[], void, { state: RootState; }>(
+export const fetchUsers = createAsyncThunk<User[], void, { state: RootState }>(
   'users/fetchUsers',
-  async (_, { getState, requestId }) => {
-    const { loading, currentRequestId } = getState().users;
+  async (_, thunkAPI) => {
+    const axiosInstance = thunkAPI.extra as Axios;
 
-    if (!loading || requestId !== currentRequestId) {
+    const { loading, currentRequestId } = thunkAPI.getState().users;
+
+    if (!loading || thunkAPI.requestId !== currentRequestId) {
       return;
     }
 
-    const { data } = await axios.get(`http://react-ssr-api.herokuapp.com/users`);
+    const { data } = await axiosInstance.get(`/users`);
 
     return data;
-  },
+  }
 );

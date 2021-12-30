@@ -31,7 +31,7 @@ app.use(
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-  const store = createStore();
+  const store = createStore(req);
 
   const promises = matchRoutes(RoutesArray, req.path)?.map((match) => {
     const route: RouteObjectWithLoadData = match.route;
