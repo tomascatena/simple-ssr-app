@@ -8,6 +8,7 @@ import serialize from 'serialize-javascript';
 import { renderRoutes } from 'react-router-config';
 import { AppRoutes } from '../client/AppRoutes';
 import { CustomStaticContext } from '../server';
+import { Helmet } from 'react-helmet';
 
 const renderer = (
   req: Request,
@@ -22,9 +23,13 @@ const renderer = (
     </Provider>
   );
 
+  const helmet = Helmet.renderStatic();
+
   return `
   <html>
     <head>
+      ${helmet.title.toString()}
+      ${helmet.meta.toString()}
       <!-- Compiled and minified CSS -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     </head>
@@ -33,7 +38,7 @@ const renderer = (
       <div id="root">${content}</div>
 
       <script id="redux-preload-state">
-      window.__PRELOADED_STATE__ = ${serialize(store.getState())}
+        window.__PRELOADED_STATE__ = ${serialize(store.getState())}
       </script>
 
       <script src="bundle.js"></script>
