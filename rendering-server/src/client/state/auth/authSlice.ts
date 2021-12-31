@@ -3,7 +3,7 @@ import { fetchCurrentUser } from './auth.thunk';
 import { User } from '../../user';
 
 export interface AuthState {
-  currentUser: User | null;
+  currentUser: User | null | boolean;
   loading: boolean;
   currentRequestId: string | undefined;
   error: SerializedError | null | string;

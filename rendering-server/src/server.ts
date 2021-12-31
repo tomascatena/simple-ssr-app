@@ -4,7 +4,7 @@ import renderer from './helpers/renderer';
 import { matchRoutes, RouteConfig } from 'react-router-config';
 import { AppRoutes } from './client/AppRoutes';
 import proxy from 'express-http-proxy';
-import { StaticContext, StaticRouterContext } from 'react-router';
+import { StaticContext } from 'react-router';
 
 export type LoadData = (
   store: ReturnType<typeof createStore>
@@ -43,17 +43,19 @@ app.get('*', (req, res) => {
     return route.loadData ? route.loadData(store) : null;
   });
 
+  const render = () => {
+    const context: CustomStaticContext = {};
+    const content = renderer(req, store, context);
+
+    if (context.notFound) {
+      res.status(404);
+    }
+
+    res.send(content);
+  };
+
   if (promises) {
-    Promise.all<typeof promises>(promises).then(() => {
-      const context: CustomStaticContext = {};
-      const content = renderer(req, store, context);
-
-      if (context.notFound) {
-        res.status(404);
-      }
-
-      res.send(content);
-    });
+    Promise.all<typeof promises>(promises).then(render).catch(render);
   }
 });
 

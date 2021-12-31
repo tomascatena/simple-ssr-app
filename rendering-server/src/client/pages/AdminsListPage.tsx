@@ -19,11 +19,13 @@ const AdminsListPage: FC<Props> = () => {
     <div>
       <h1>Protected list of Admins</h1>
 
-      <ul>
-        {adminsList?.map((admin) => {
-          <li key={admin.id}>{admin.name}</li>;
-        })}
-      </ul>
+      {adminsList && (
+        <ul>
+          {adminsList.map((admin) => {
+            <li key={admin.id}>{admin.name}</li>;
+          })}
+        </ul>
+      )}
     </div>
   );
 };

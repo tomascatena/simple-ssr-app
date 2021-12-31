@@ -16,6 +16,6 @@ export const fetchAdmins = createAsyncThunk<User[], void, { state: RootState }>(
 
     const { data } = await axiosInstance.get(`/current_user`);
 
-    return data || false;
+    return data;
   }
 );
