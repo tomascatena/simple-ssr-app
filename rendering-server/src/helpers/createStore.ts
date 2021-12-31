@@ -1,12 +1,13 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import axios from 'axios';
 import usersSlice from '../client/state/users/usersSlice';
-import { Request } from 'express';
 import authReducer from '../client/state/auth/authSlice';
+import adminReducer from '../client/state/admin/adminSlice';
+import { Request } from 'express';
 
 const createStore = (req: Request) => {
   const axiosInstance = axios.create({
-    baseURL: 'http://react-ssr-api.herokuapp.com',
+    baseURL: 'https://react-ssr-api.herokuapp.com/',
     headers: { cookie: req.get('cookie') || '' },
   });
 
@@ -14,8 +15,8 @@ const createStore = (req: Request) => {
     reducer: {
       users: usersSlice,
       auth: authReducer,
+      admin: adminReducer,
     },
-    devTools: process.env.NODE_ENV !== 'production',
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         thunk: { extraArgument: axiosInstance },

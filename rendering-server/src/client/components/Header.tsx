@@ -5,16 +5,34 @@ import { useTypedSelector } from '../hooks';
 interface Props {}
 
 const Header: FC<Props> = () => {
-  const auth = useTypedSelector((state) => state.auth);
+  const { currentUser } = useTypedSelector((state) => state.auth);
 
-  console.log(auth);
+  const authButton = currentUser ? (
+    <a href='/api/logout'>Logout</a>
+  ) : (
+    <a href='/api/auth/google'>Login</a>
+  );
 
   return (
-    <div>
-      <Link to='/'>React SSR</Link>
+    <nav>
+      <div className='nav-wrapper'>
+        <Link to='/' className='brand-logo'>
+          React SSR
+        </Link>
 
-      <Link to='/users'>Users List</Link>
-    </div>
+        <ul className='right'>
+          <li>
+            <Link to='/users'>Users</Link>
+          </li>
+
+          <li>
+            <Link to='/admins'>admins</Link>
+          </li>
+
+          <li>{authButton}</li>
+        </ul>
+      </div>
+    </nav>
   );
 };
 

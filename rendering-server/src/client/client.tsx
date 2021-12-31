@@ -7,6 +7,7 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import usersReducer from './state/users/usersSlice';
 import authReducer from './state/auth/authSlice';
+import adminReducer from './state/admin/adminSlice';
 import axios from 'axios';
 import { renderRoutes } from 'react-router-config';
 import { AppRoutes } from './AppRoutes';
@@ -26,6 +27,7 @@ export const store = configureStore({
   reducer: {
     users: usersReducer,
     auth: authReducer,
+    admin: adminReducer,
   },
   preloadedState: window.__PRELOADED_STATE__,
   devTools: process.env.NODE_ENV !== 'production',

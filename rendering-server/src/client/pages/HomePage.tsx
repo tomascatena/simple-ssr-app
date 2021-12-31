@@ -4,9 +4,10 @@ interface Props {}
 
 const HomePage: FC<Props> = () => {
   return (
-    <div>
-      <div>I'm the best Home Component!</div>
-      <button onClick={() => console.log('Hola!!')}>Press me!</button>
+    <div className='center-align' style={{ marginTop: '200px' }}>
+      <h3>Welcome</h3>
+
+      <p>Check out this awesome features</p>
     </div>
   );
 };
