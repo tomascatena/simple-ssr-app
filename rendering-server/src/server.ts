@@ -4,13 +4,13 @@ import renderer from './helpers/renderer';
 import { matchRoutes, RouteConfig } from 'react-router-config';
 import { AppRoutes } from './client/AppRoutes';
 import proxy from 'express-http-proxy';
-import { StaticContext } from 'react-router';
+import { StaticRouterContext } from 'react-router';
 
 export type LoadData = (
   store: ReturnType<typeof createStore>
 ) => Promise<unknown>;
 
-export interface CustomStaticContext extends StaticContext {
+export interface CustomStaticContext extends StaticRouterContext {
   notFound?: boolean;
 }
 interface RouteObjectWithLoadData extends RouteConfig {
@@ -37,15 +37,29 @@ app.use(express.static('public'));
 app.get('*', (req, res) => {
   const store = createStore(req);
 
-  const promises = matchRoutes(AppRoutes, req.path)?.map((match) => {
-    const route: RouteObjectWithLoadData = match.route;
+  console.log(req.path);
 
-    return route.loadData ? route.loadData(store) : null;
-  });
+  const promises = matchRoutes(AppRoutes, req.path)
+    ?.map((match) => {
+      const route: RouteObjectWithLoadData = match.route;
+
+      return route.loadData ? route.loadData(store) : null;
+    })
+    .map((promise) => {
+      if (promise) {
+        return new Promise((resolve) => {
+          promise.then(resolve).catch(resolve); // Always resolve
+        });
+      }
+    });
 
   const render = () => {
     const context: CustomStaticContext = {};
     const content = renderer(req, store, context);
+
+    if (context.url) {
+      return res.redirect(301, context.url);
+    }
 
     if (context.notFound) {
       res.status(404);

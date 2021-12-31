@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { fetchAdmins } from '../state/admin/admin.thunk';
 import createStore from '../../helpers/createStore';
 import { useAppDispatch, useTypedSelector } from '../hooks';
+import RequireAuth from '../components/HOCs/RequireAuth';
 
 interface Props {}
 
@@ -35,6 +36,6 @@ const loadData = (store: ReturnType<typeof createStore>) => {
 };
 
 export default {
-  component: AdminsListPage,
+  component: RequireAuth(AdminsListPage),
   loadData,
 };

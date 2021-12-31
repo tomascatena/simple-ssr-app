@@ -7,7 +7,6 @@ import createStore from './createStore';
 import serialize from 'serialize-javascript';
 import { renderRoutes } from 'react-router-config';
 import { AppRoutes } from '../client/AppRoutes';
-import { StaticContext } from 'react-router';
 import { CustomStaticContext } from '../server';
 
 const renderer = (

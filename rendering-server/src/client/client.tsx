@@ -3,7 +3,7 @@
 import { configureStore, ThunkAction, Action, Store } from '@reduxjs/toolkit';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import usersReducer from './state/users/usersSlice';
 import authReducer from './state/auth/authSlice';
@@ -51,9 +51,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 
 ReactDOM.hydrate(
   <Provider store={store}>
-    <BrowserRouter>
-      <Switch>{renderRoutes(AppRoutes)}</Switch>
-    </BrowserRouter>
+    <BrowserRouter>{renderRoutes(AppRoutes)}</BrowserRouter>
   </Provider>,
   document.querySelector('#root')
 );
